@@ -51,20 +51,10 @@ def search_ex(request):
 
 
 def weather_map(request):
-    """
-    with open('datasets/city2coord.json',encoding='utf-8') as f:
-        city_data = json.load(f)
-    with open('datasets/maincity.json',encoding='utf-8') as f:
-        capital_data = json.load(f)
-    """
-    # with open('datasets/maincity.json',encoding='utf-8') as f:
-    # capital_data = json.load(f)
     head = "https://weather.cma.cn/api/map/weather/1?t="
     url = head + str(int(time.time() * 1000))
     response = requests.get(url)
     city_data = response.text
-    # with open('datasets/province_bound.geojson',encoding='utf-8') as f:
-    # china_province=json.load(f)
     """
     # 将中心点坐标添加到 GeoJSON 数据中的属性中
     for feature in china_province['features']:
