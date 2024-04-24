@@ -1,0 +1,23 @@
+{% extends "tmp.html" %}
+{% load static %}
+
+{% block mapstyle%}
+<link rel="stylesheet" href="{% static AppVite.css%}">
+{% comment %} <style>
+    .container {
+        position:absolute;
+        top:0;
+        left:0;
+        width:1500px;
+        border:solid 1px black;
+    }
+
+    .mt15 {
+        display:flex;
+        flex-direction:row;
+    }
+</style> {% endcomment %}
+{% endblock%}
+{% block content%}
+    {% include "bulletin.html"%}
+{% endblock %}

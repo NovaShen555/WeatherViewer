@@ -1,0 +1,107 @@
+{% extends "tmp.html" %}
+{% load static %}
+{% block mapstyle %}
+    <link rel="stylesheet" type="text/css" href="{% static "font_1145929_t7e3a52mhxh.css" %}">
+{% endblock mapstyle %}
+
+{% block content%}
+    <div class="pd20"> 
+        <div class="imgblock"> 
+        <img id="imgPath" alt="" src="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423130000000.JPG?v=1713879281608" onerror="this.onerror='';this.src='/assets/cma/img/default.png';this.alt='图片不存在'"> 
+        </div> 
+        <!--工具栏 start--> 
+        <div class="mytoolbar"> 
+        <div class="progress"> 
+        <div id="progressBar" class="progress-bar progress-bar-success" style="width: 100%;"></div> 
+        </div> 
+        <div class="row" id="toolbar"> 
+        <div class="col-xs-4 text-left"> 
+        <i class="iconfont icon-prev noselect" id="prev"></i> 
+        <i class="iconfont icon-play noselect" id="player"></i> 
+        <i class="iconfont icon-next2 noselect" id="next"></i> 
+        </div> 
+        <div class="col-xs-4 text-center"> 
+        <div style="height:28px; line-height:28px;"> 
+            <div class="bdsharebuttonbox" style="float:left;padding-top:2px;">
+            <span style="float:left;color:#fff;">分享到：</span>
+            <a href="#" class="bds_more" data-cmd="more"></a>
+            <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+            <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+            <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+            </div> 
+            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
+        </div> 
+        </div> 
+        <div class="col-xs-4 text-right"> 
+        <select id="timeList"> <option selected="selected" value="https://weather.cma.cnhttps://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423130000000.JPG?v=1713879281608">2024年04月23日21时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423124500000.JPG?v=1713877887334">2024年04月23日20时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423123000000.JPG?v=1713877921338">2024年04月23日20时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423121500000.JPG?v=1713876613294">2024年04月23日20时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423120000000.JPG?v=1713876000731">2024年04月23日20时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423114500000.JPG?v=1713874826691">2024年04月23日19时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423113000000.JPG?v=1713874241120">2024年04月23日19时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423111500000.JPG?v=1713872973135">2024年04月23日19时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423110000000.JPG?v=1713872450949">2024年04月23日19时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423104500000.JPG?v=1713871185532">2024年04月23日18时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423103000000.JPG?v=1713870644547">2024年04月23日18时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423101500000.JPG?v=1713869415862">2024年04月23日18时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423100000000.JPG?v=1713868757760">2024年04月23日18时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423094500000.JPG?v=1713867592756">2024年04月23日17时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423093000000.JPG?v=1713866954954">2024年04月23日17时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423091500000.JPG?v=1713865811899">2024年04月23日17时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423090000000.JPG?v=1713865154362">2024年04月23日17时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423084500000.JPG?v=1713864012164">2024年04月23日16时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423083000000.JPG?v=1713863356783">2024年04月23日16时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423081500000.JPG?v=1713862167094">2024年04月23日16时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423080000000.JPG?v=1713861623579">2024年04月23日16时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423074500000.JPG?v=1713860416232">2024年04月23日15时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423073000000.JPG?v=1713859810938">2024年04月23日15时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423071500000.JPG?v=1713858610512">2024年04月23日15时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423070000000.JPG?v=1713857985660">2024年04月23日15时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423064500000.JPG?v=1713856750492">2024年04月23日14时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423063000000.JPG?v=1713856201325">2024年04月23日14时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423061500000.JPG?v=1713855018451">2024年04月23日14时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423060000000.JPG?v=1713854351075">2024年04月23日14时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423054500000.JPG?v=1713853167815">2024年04月23日13时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423053000000.JPG?v=1713852586349">2024年04月23日13时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423051500000.JPG?v=1713851366900">2024年04月23日13时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423050000000.JPG?v=1713850758230">2024年04月23日13时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423044500000.JPG?v=1713849572435">2024年04月23日12时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423043000000.JPG?v=1713848972447">2024年04月23日12时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423041500000.JPG?v=1713847776201">2024年04月23日12时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423040000000.JPG?v=1713847186235">2024年04月23日12时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423033000000.JPG?v=1713845356700">2024年04月23日11时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423031500000.JPG?v=1713844155889">2024年04月23日11时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423030000000.JPG?v=1713843570753">2024年04月23日11时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423024500000.JPG?v=1713842383445">2024年04月23日10时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423023000000.JPG?v=1713841746617">2024年04月23日10时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423021500000.JPG?v=1713840551839">2024年04月23日10时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423020000000.JPG?v=1713839962176">2024年04月23日10时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423014500000.JPG?v=1713838760741">2024年04月23日09时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423013000000.JPG?v=1713838760729">2024年04月23日09时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423011500000.JPG?v=1713837066248">2024年04月23日09时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423010000000.JPG?v=1713835996266">2024年04月23日09时00分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423004500000.JPG?v=1713835390735">2024年04月23日08时45分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423003000000.JPG?v=1713834307077">2024年04月23日08时30分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423001500000.JPG?v=1713833826097">2024年04月23日08时15分</option> <option value="https://weather.cma.cn/file/2024/04/23/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240423000000000.JPG?v=1713832512418">2024年04月23日08时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422234500000.JPG?v=1713831406071">2024年04月23日07时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422233000000.JPG?v=1713830905830">2024年04月23日07时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422231500000.JPG?v=1713829396417">2024年04月23日07时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422230000000.JPG?v=1713829590859">2024年04月23日07时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422224500000.JPG?v=1713827973324">2024年04月23日06时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422223000000.JPG?v=1713827377407">2024年04月23日06时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422221500000.JPG?v=1713826650312">2024年04月23日06时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422220000000.JPG?v=1713825971459">2024年04月23日06时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422214500000.JPG?v=1713824491439">2024年04月23日05时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422213000000.JPG?v=1713823781735">2024年04月23日05时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422211500000.JPG?v=1713823100596">2024年04月23日05时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422210000000.JPG?v=1713822375749">2024年04月23日05时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422204500000.JPG?v=1713820916302">2024年04月23日04时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422203000000.JPG?v=1713820067068">2024年04月23日04时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422201500000.JPG?v=1713819307438">2024年04月23日04时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422200000000.JPG?v=1713818700934">2024年04月23日04时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422194500000.JPG?v=1713817166077">2024年04月23日03时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422193000000.JPG?v=1713816455746">2024年04月23日03时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422191500000.JPG?v=1713815831672">2024年04月23日03时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422190000000.JPG?v=1713814542181">2024年04月23日03时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422184500000.JPG?v=1713813143156">2024年04月23日02时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422183000000.JPG?v=1713813207339">2024年04月23日02时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422181500000.JPG?v=1713811782570">2024年04月23日02时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422180000000.JPG?v=1713811111690">2024年04月23日02时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422174500000.JPG?v=1713810332057">2024年04月23日01时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422173000000.JPG?v=1713809621699">2024年04月23日01时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422171500000.JPG?v=1713808251835">2024年04月23日01时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422163000000.JPG?v=1713806199808">2024年04月23日00时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422161500000.JPG?v=1713804688874">2024年04月23日00时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422160000000.JPG?v=1713803895640">2024年04月23日00时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422154500000.JPG?v=1713803121355">2024年04月22日23时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422153000000.JPG?v=1713801939911">2024年04月22日23时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422151500000.JPG?v=1713800696883">2024年04月22日23时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422150000000.JPG?v=1713800107090">2024年04月22日23时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422144500000.JPG?v=1713799277257">2024年04月22日22时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422143000000.JPG?v=1713798556032">2024年04月22日22时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422140000000.JPG?v=1713796592542">2024年04月22日22时00分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422134500000.JPG?v=1713795972636">2024年04月22日21时45分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422133000000.JPG?v=1713794731623">2024年04月22日21时30分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422131500000.JPG?v=1713793607235">2024年04月22日21时15分</option> <option value="https://weather.cma.cn/file/2024/04/22/SEVP_NSMC_WXBL_FY4B_ETCC_ACHN_LNO_PY_20240422130000000.JPG?v=1713792926519">2024年04月22日21时00分</option> </select> 
+        </div> 
+        </div> 
+        </div> 
+        <!--工具栏 end--> 
+    </div>
+    <script type="text/javascript">
+		$(function(){
+			$('#nav-309').trigger('mouseenter');
+			$('.dropdown-toggle').dropdownHover();
+			ImagePlayer.init(92);
+		});
+	</script>
+    <script>
+        $(function(){
+            $('.dropdown-toggle').dropdownHover();
+            
+            $("#searchInput").autocomplete('/api/autocomplete', {
+                width: 345,
+                max: 10,
+                scroll: true,
+                scrollHeight: 400,
+                matchCase:true,
+                parse:function(rows){
+                    var parsed = [];
+                    for (var i=0; i < rows.data.length; i++) {
+                        var row = rows.data[i];
+                        if (row) {
+                            parsed[parsed.length] = {
+                                data: row,
+                                value: row.split('|')[0]
+                            };
+                        }
+                    }
+                    return parsed;
+                },
+                focusEvent:function(input, event){
+                    var v = $(input).val();
+                    if(v == ''){
+                        $('#selectCityDiv').show();
+                    } else {
+                        $('#selectCityDiv').hide();
+                    }
+                },
+                formatItem: function(row) {
+                    $('#selectCityDiv').hide();
+                    var arr = row.split('|');
+                    return '<div class="row-fluid"><div class="pull-left">' + arr[1] + '</div><div class="pull-right">' + arr[3] + '</div></div>';
+                }
+            }).result(function(event, row, formatted) {
+                var arr = row.split('|');
+                $("#searchInput").val(arr[1]);
+                window.location.href = '/web/weather/' + arr[0] + '.html';
+            });
+            
+            $(document).click(function(e){
+                var obj = $(e.srcElement || e.target);
+                var c = obj.attr('class') || null;
+                var id = obj.attr('id') || null;
+                console.log(c)
+                console.log(id)
+                if((c != null && c.indexOf('tabflag') > -1) || (id != null && (id == 'selectCityDiv' || id == 'searchInput'))) {
+                    return true;
+                } else {
+                    $('#selectCityDiv').hide();
+                }
+            });
+        });
+    </script>
+    <script id="_trs_ta_js" src="//ta.trs.cn/c/js/ta.js?mpid=6252" async="" defer=""></script>
+{% endblock%}

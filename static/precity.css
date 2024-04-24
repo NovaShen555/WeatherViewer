@@ -1,0 +1,64 @@
+.container {
+    display: flex; /* 使用 Flexbox 布局 */
+    display: flex; /* 使用 Flexbox 居中内容 */
+    flex-direction: column; /* 垂直排布内容 */
+    justify-content: center; /* 水平居中内容 */
+    align-items: center; /* 垂直居中内容 */
+    
+}
+.search-bar {
+    text-align: right;
+    margin-right: 50px; /* 设置搜索栏与右边界的距离 */
+    margin-top: 20px; /* 设置搜索栏与上边界的距离 */
+}
+
+.search-bar input[type="text"] {
+    width: 300px; /* 设置搜索框的宽度 */
+    padding: 10px; /* 设置搜索框的内边距 */
+    border: 1px solid #ccc; /* 设置搜索框的边框 */
+    border-radius: 5px; /* 设置搜索框的边框圆角 */
+    box-sizing: border-box; /* 设置盒模型为 border-box，包括内边距和边框在内的尺寸都被包含在内，而不会增加盒子的尺寸 */
+}
+
+.search-bar button {
+    padding: 10px 20px; /* 设置按钮的内边距 */
+    border: none; /* 移除按钮的边框 */
+    border-radius: 5px; /* 设置按钮的边框圆角 */
+    background-color: #007bff; /* 设置按钮的背景颜色 */
+    color: #fff; /* 设置按钮的文字颜色 */
+    cursor: pointer; /* 设置鼠标悬停时的光标样式为手型 */
+}
+
+.menu-bar {
+    background-color: #007bff; /* 设置按钮行的背景颜色 */
+    padding: 3px 20px; /* 设置按钮行的内边距，左右各 20px */
+    margin-top: 20px; /* 设置按钮行与搜索框之间的间距 */
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 水平居中按钮 */
+}
+
+.menu-buttons {
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中按钮 */
+}
+
+.menu-buttons button {
+    padding: 10px 50px; /* 设置按钮的内边距 */
+    margin: 0 0px; /* 设置按钮之间的间距 */
+    border: none; /* 移除按钮的边框 */
+    height: 60px; /* 设置按钮行的高度 */
+    background-color: #007bff; /* 设置按钮的背景颜色为蓝色 */
+    color: #fff; /* 设置按钮的文字颜色 */
+    cursor: pointer; /* 设置鼠标悬停时的光标样式为手型 */
+    font-size: 20px; /* 设置按钮的字体大小 */
+    transition: background-color 0.3s; /* 添加过渡效果 */
+}
+
+.menu-buttons button:hover {
+    background-color: #0056b3; /* 设置鼠标悬停时按钮的背景颜色为深蓝色 */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
+}
+
+.menu-buttons button:first-child {
+    margin-left: 0; /* 如果按钮行的第一个按钮，则移除左边距 */
+}

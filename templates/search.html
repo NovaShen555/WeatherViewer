@@ -1,0 +1,46 @@
+{% extends "tmp.html" %}
+{% block mapstyle %}
+<style>
+    .container {
+        display:flex;
+        flex-direction:column;
+        justify-content: center; /* 水平居中按钮 */
+        text-align: center;
+    }
+</style>
+{% endblock%}
+{% block content %}
+<div class="container">
+    <h1 style="margin:10px;width:60%;height:100px;border:solid 2px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;">Search Results for "{{ query }}"</h1>
+    <div id="city-list" style="font-size:50px;
+    width:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var cities = {{ cities|safe }};
+            var cityList = document.getElementById('city-list');
+            if (cities.length > 0) {
+                var ul = document.createElement('ul');
+                cities.forEach(function(city) {
+                    var li = document.createElement('li');
+                    var a = document.createElement('a');
+                    a.href = city.url;
+                    a.textContent = city.name;
+                    li.appendChild(a);
+                    ul.appendChild(li);
+                });
+                cityList.appendChild(ul);
+            } else {
+                var p = document.createElement('p');
+                p.textContent = 'No results found.';
+                cityList.appendChild(p);
+            }
+        });
+    </script>
+</div>
+{% endblock %}

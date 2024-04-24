@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>中国省份边界示例</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+        }
+        
+        #provinceSelector {
+            position: absolute;
+            top: 10px;
+            left: 50px;
+            z-index: 1000;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        #map {
+            margin-top: 10px;
+            width: 100%;
+            height: 600px;
+        }
+
+        /* 自定义标记的样式 */
+        .custom-marker {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* 左对齐 */
+            width: 90px;
+            height: 40px;
+            text-align: center;
+            background-color: white; /* 添加纯白色背景 */
+        }
+    </style>
+</head>
+<body>
+    <div id="map-container">
+        <div id="provinceSelector">
+            <label for="provinceSelect"></label>
+            <select id="provinceSelect" onchange="moveMapAndHighlight()">
+                <option value="all">全国</option>
+                <!-- 省份选项将在此动态添加 -->
+            </select>
+            <script>
+                var provinceData = JSON.parse('{{ capital_data_json|escapejs }}');
+    
+                // 获取省份选择的下拉菜单元素
+                var selectElement = document.getElementById("provinceSelect");
+    
+                // 循环遍历省份数据，为每个省份创建一个选项
+                Object.keys(provinceData).forEach(function(province) {
+                    // 创建 <option> 元素
+                    var optionElement = document.createElement("option");
+                    // 设置选项的值和显示文本为省份名称
+                    optionElement.value = province;
+                    optionElement.textContent = province;
+                    // 将选项添加到下拉菜单中
+                    selectElement.appendChild(optionElement);
+                });
+            </script>
+        </div>
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map', {
+            center: [35, 105], // 中国的中心点经纬度
+            zoom: 4, // 初始缩放级别
+            minZoom: 4 // 最小缩放级别
+        });
+
+        L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {}).addTo(map);
+        //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        var provincesLayer = null;
+
+        // 加载省份边界数据
+        var chinaProvince = JSON.parse("{{ china_province|escapejs }}");
+
+        function moveMapAndHighlight() {
+            // 获取选中的省份名称
+            var selectedProvince = document.getElementById("provinceSelect").value;
+            
+            if (selectedProvince === "all") {
+                // 如果选择了“全国”，则将地图移动到初始状态
+                map.setView([35, 105], 4); // 设置地图中心和缩放级别
+                // 移除高亮图层
+                if (provincesLayer) {
+                    map.removeLayer(provincesLayer);
+                    provincesLayer = null; // 将高亮图层置为 null
+                }
+                return; // 结束函数执行
+            }
+            // 查找选中省份的特征对象
+            var selectedProvinceFeature = chinaProvince.features.find(function(feature) {
+                return feature.properties.name === selectedProvince;
+            });
+        
+            // 如果找到了选中省份的特征对象
+            if (selectedProvinceFeature) {
+                // 获取选中省份的边界框
+                var bounds = L.geoJSON(selectedProvinceFeature).getBounds();
+                // 将地图缩放到选中省份的边界框内
+                map.fitBounds(bounds, { animate: true });
+        
+                // 移除之前的高亮图层
+                if (provincesLayer) {
+                    map.removeLayer(provincesLayer);
+                }
+        
+                // 创建新的高亮图层，并添加到地图上
+                provincesLayer = L.geoJSON(selectedProvinceFeature, {
+                    style: function(feature) {
+                        return {
+                            color: 'blue',
+                            weight: 2
+                        };
+                    }
+                }).addTo(map);
+            }
+        }
+        
+        
+        
+        // 使用后端传递的城市数据
+        var cityAllData = JSON.parse('{{ city_data_json|escapejs }}');
+        var cityData = cityAllData.data.city
+        console.log(typeof cityData)
+        //var capitalData = JSON.parse('{{ capital_data_json|escapejs }}');
+        
+        // 创建空数组来存储标记
+        var district_markers = [];
+        var city_markers = [];
+        var capital_markers = [];
+        var special_markers = [];
+
+        // 遍历每个城市，并在地图上添加标记
+        Object.values(cityData).forEach(city => {
+            //console.log(city[1])
+            city[4]=Math.round(city[4]);
+            city[6]=Math.round(city[6]);
+            
+            // 创建自定义标记图标的 HTML 内容
+            var imageUrl = "{% static 'img/w/icon/w' %}" + city[8] + ".png";
+            var imageAlt = city[8] + ".png";
+            var customIconContent = `
+                <div class="custom-marker" style="display: flex; align-items: center;">
+                    <div style="display: flex; align-items: center; background-color: navy;">
+                        <img src="${imageUrl}" alt="${imageAlt}" style="width: 40px; height: auto;">
+                    </div>
+                    <div>
+                        <div style="margin-left: 5px; text-align: center;">
+                            <div style="font-size: 4px;">${city[1]}</div>
+                            <div style="font-size: 4px;">${city[4]}/${city[6]}℃</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            var specialIconContent = `
+            <div style="display: inline-block; align-items: center; background-color: navy;">
+                <img src="${imageUrl}" alt="${imageAlt}" style="width: 40px; height: auto;">
+            </div>
+            `;
+
+            // 创建自定义标记图标
+            var customIcon = L.divIcon({
+                className: 'custom-div-icon',
+                html: customIconContent,
+                iconSize: [10, 10], // 图标大小
+                iconAnchor: [50, 50], // 图标锚点（中心）
+            });
+            var specialIcon = L.divIcon({
+                className: 'special-div-icon',
+                html: specialIconContent,
+                iconSize: [10, 10], // 图标大小
+                iconAnchor: [50, 50], // 图标锚点（中心）
+            });
+            //console.log(city[4],city[5])
+            var marker = L.marker(
+                [parseFloat(city[4]), parseFloat(city[5])],
+                { icon: customIcon }
+            )
+            
+
+            // 使用split方法将日期字符串按照"/"分割成数组
+            var dateParts = cityAllData.data.date.split("/");
+
+            // 创建自定义弹出框的 HTML 内容
+            var popupContent = `
+                <div>
+                    <h3>${city[1]}${dateParts[1]}月${dateParts[2]}日天气预报</h3>
+                    <p style="text-align: right; font-size: 16px;">${city[7]}</p>
+                    <p style="text-align: right; font-size: 16px;">${city[4]}/${city[6]}℃</p>
+                    <p style="text-align: right; font-size: 16px;">${city[10]} ${city[11]}</p>
+                    <a href='../../wheather/${city[0]}' style="display: block; text-align: center; font-size: 16px;">
+                        查看未来7天预报
+                    </a>
+                </div>
+            `;
+
+            // 创建自定义弹出框
+            var customPopup = L.popup().setContent(popupContent);
+
+            // 设置标记的弹出框内容
+            marker.bindPopup(
+                customPopup,
+                { offset: L.point(0, -40) }
+            );
+
+            // 添加标记到地图上
+            console.log(typeof city[3])
+            if (city[3] <= 1) {
+                capital_markers.push(marker);
+                // 特殊处理只显示图像的情况
+                var marker_sp = L.marker(
+                    [parseFloat(city[4]), parseFloat(city[5])],
+                    { icon: specialIcon }
+                ).bindPopup(
+                    customPopup,
+                    { offset: L.point(-30, -40) }
+                );
+                special_markers.push(marker_sp)
+                marker_sp.addTo(map);
+            }
+            else if (city[3] == 2) {
+                city_markers.push(marker);
+            }
+            else {
+                district_markers.push(marker);
+            }
+        });
+
+        // 监听地图缩放事件
+        map.on('zoomend', function() {
+            var zoomLevel = map.getZoom();
+            var textshow = 6
+            var smallzoom = 8
+            var bigzoom = 10
+            // 根据缩放级别调整标记的显示
+            district_markers.forEach(marker => {
+                // 判断当前缩放级别是否在标记的显示范围内
+                if (zoomLevel >= bigzoom) {
+                    // 在显示范围内，则添加到地图上
+                    marker.addTo(map);
+                } else {
+                    // 不在显示范围内，则从地图上移除
+                    map.removeLayer(marker);
+                }
+            });
+            city_markers.forEach(marker => {
+                // 判断当前缩放级别是否在标记的显示范围内
+                if (zoomLevel >= smallzoom) {
+                    // 在显示范围内，则添加到地图上
+                    marker.addTo(map);
+                } else {
+                    // 不在显示范围内，则从地图上移除
+                    map.removeLayer(marker);
+                }
+            });
+            capital_markers.forEach(marker => {
+                // 判断当前缩放级别是否在标记的显示范围内
+                if (zoomLevel >= textshow) {
+                    // 在显示范围内，则添加到地图上
+                    marker.addTo(map);
+                } else {
+                    // 不在显示范围内，则从地图上移除
+                    map.removeLayer(marker);
+                }
+            });
+            special_markers.forEach(marker => {
+                // 判断当前缩放级别是否在标记的显示范围内
+                if (zoomLevel < textshow) {
+                    // 在显示范围内，则添加到地图上
+                    marker.addTo(map);
+                } else {
+                    // 不在显示范围内，则从地图上移除
+                    map.removeLayer(marker);
+                }
+            });
+            
+        });
+        
+        // 创建一个自定义控件
+        var zoomLevelControl = L.control();
+
+        // 定义控件的位置和外观
+        zoomLevelControl.onAdd = function(map) {
+            var div = L.DomUtil.create('div', 'zoom-level-control');
+            div.innerHTML = 'Zoom Level: ' + map.getZoom();
+            return div;
+        };
+
+        // 将控件添加到地图上的右上角
+        zoomLevelControl.addTo(map);
+
+        // 监听地图的缩放事件，更新控件中的缩放级别显示
+        map.on('zoomend', function() {
+            document.querySelector('.zoom-level-control').innerHTML = 'Zoom Level: ' + map.getZoom();
+        });
+    </script>
+</body>
+</html>

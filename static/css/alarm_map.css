@@ -1,0 +1,56 @@
+
+#map-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+
+#provinceSelector {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    z-index: 1000;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+#map {
+    margin-top: 10px;
+    width: 100%;
+    height: 600px;
+}
+
+/* 自定义标记的样式 */
+.custom-marker {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* 左对齐 */
+    width: 90px;
+    height: 40px;
+    text-align: center;
+    background-color: white; /* 添加纯白色背景 */
+}
+
+#map-containered {
+    position: relative;
+    width: 100%; /* 设置地图容器的宽度为页面宽度的 30% */
+    height: auto; /* 设置地图容器的高度 */
+    style: flex;
+    flex-direction:column;
+}
+
+#banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* 将色带宽度设为与地图容器相同 */
+    background-color: #f0f0f0; /* 淡灰色背景 */
+    padding: 10px; /* 设置内边距 */
+    box-sizing: border-box; /* 让内边距不影响元素宽度 */
+    font-size: 18px; /* 设置字体大小 */
+    font-weight: bold; /* 设置字体粗细 */
+    text-align: left; /* 左对齐内容 */
+    border: 1px solid black; /* 添加黑色边框 */
+    z-index:2;
+}
