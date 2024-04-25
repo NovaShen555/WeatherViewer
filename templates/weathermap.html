@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>中国省份边界示例</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="{% static 'leaflet.css' %}" />
     <style>
         #map-container {
             position: relative;
@@ -49,7 +49,7 @@
                 <!-- 省份选项将在此动态添加 -->
             </select>
             <script>
-                var provinceData = JSON.parse('{{ capital_data_json|escapejs }}');
+                var provinceData = JSON.parse("{{ capital_data_json|escapejs }}");
     
                 // 获取省份选择的下拉菜单元素
                 var selectElement = document.getElementById("provinceSelect");
@@ -68,7 +68,7 @@
         </div>
         <div id="map"></div>
     </div>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{% static 'leaflet.js'%} "></script>
     <script>
         var map = L.map('map', {
             center: [35, 105], // 中国的中心点经纬度
@@ -129,26 +129,27 @@
         
         
         // 使用后端传递的城市数据
-        var cityAllData = JSON.parse('{{ city_data_json|escapejs }}');
-        var cityData = cityAllData.data.city
-        console.log(typeof cityData)
+        var cityData = JSON.parse("{{city_data_json|escapejs}}")
+        //console.log(cityData)
         //var capitalData = JSON.parse('{{ capital_data_json|escapejs }}');
+        
         
         // 创建空数组来存储标记
         var district_markers = [];
         var city_markers = [];
         var capital_markers = [];
         var special_markers = [];
+        //console.log(cityData[1])
 
         // 遍历每个城市，并在地图上添加标记
         Object.values(cityData).forEach(city => {
             //console.log(city[1])
-            city[4]=Math.round(city[4]);
-            city[6]=Math.round(city[6]);
+            city = city.fields;
+            //console.log(city);
             
             // 创建自定义标记图标的 HTML 内容
-            var imageUrl = "{% static 'img/w/icon/w' %}" + city[8] + ".png";
-            var imageAlt = city[8] + ".png";
+            var imageUrl = "/static/img/w/icon/w" + city.m_weather_img + ".png";
+            var imageAlt = city.m_weather_img + ".png";
             var customIconContent = `
                 <div class="custom-marker" style="display: flex; align-items: center;">
                     <div style="display: flex; align-items: center; background-color: navy;">
@@ -156,8 +157,8 @@
                     </div>
                     <div>
                         <div style="margin-left: 5px; text-align: center;">
-                            <div style="font-size: 4px;">${city[1]}</div>
-                            <div style="font-size: 4px;">${city[4]}/${city[6]}℃</div>
+                            <div style="font-size: 4px;">${city.city}</div>
+                            <div style="font-size: 4px;">${city.high_temp}/${city.low_temp}℃</div>
                         </div>
                     </div>
                 </div>
@@ -181,24 +182,23 @@
                 iconSize: [10, 10], // 图标大小
                 iconAnchor: [50, 50], // 图标锚点（中心）
             });
-            //console.log(city[4],city[5])
             var marker = L.marker(
-                [parseFloat(city[4]), parseFloat(city[5])],
+                [city.latitude, city.longitude],
                 { icon: customIcon }
             )
             
 
             // 使用split方法将日期字符串按照"/"分割成数组
-            var dateParts = cityAllData.data.date.split("/");
+            var dateParts = "{{DateTime}}".split("/");
 
             // 创建自定义弹出框的 HTML 内容
             var popupContent = `
                 <div>
-                    <h3>${city[1]}${dateParts[1]}月${dateParts[2]}日天气预报</h3>
-                    <p style="text-align: right; font-size: 16px;">${city[7]}</p>
-                    <p style="text-align: right; font-size: 16px;">${city[4]}/${city[6]}℃</p>
-                    <p style="text-align: right; font-size: 16px;">${city[10]} ${city[11]}</p>
-                    <a href='../../wheather/${city[0]}' style="display: block; text-align: center; font-size: 16px;">
+                    <h3>${city.city}${dateParts[1]}月${dateParts[2]}日天气预报</h3>
+                    <p style="text-align: right; font-size: 16px;">${city.m_weather_name}</p>
+                    <p style="text-align: right; font-size: 16px;">${city.low_temp}/${city.high_temp}℃</p>
+                    <p style="text-align: right; font-size: 16px;">${city.m_wind_direction} ${city.m_wind_power}</p>
+                    <a href='../../wheather/${city.url}' style="display: block; text-align: center; font-size: 16px;">
                         查看未来7天预报
                     </a>
                 </div>
@@ -214,12 +214,11 @@
             );
 
             // 添加标记到地图上
-            console.log(typeof city[3])
-            if (city[3] <= 1) {
+            if (city.type <= 1) {
                 capital_markers.push(marker);
                 // 特殊处理只显示图像的情况
                 var marker_sp = L.marker(
-                    [parseFloat(city[4]), parseFloat(city[5])],
+                    [city.latitude, city.longitude],
                     { icon: specialIcon }
                 ).bindPopup(
                     customPopup,
@@ -228,7 +227,7 @@
                 special_markers.push(marker_sp)
                 marker_sp.addTo(map);
             }
-            else if (city[3] == 2) {
+            else if (city.type == 2) {
                 city_markers.push(marker);
             }
             else {
