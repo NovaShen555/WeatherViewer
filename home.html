@@ -1,0 +1,1009 @@
+{% extends "tmp.html" %}
+{% load static %}
+{% block content%}
+     <a href="/weather/59431" id="current-station"> 
+      <div class="row my_city"> 
+       <div class="col-xs-4"> 
+        <div class="row city_name"> 
+         <div class="col-xs-8 text-left"><i class="iconfont icon-weizhi"></i>南宁</div> 
+         <div class="col-xs-4 text-right"><i class="iconfont icon-time"></i>18:25</div> 
+        </div> 
+        <div class="row">
+         <div class="col-xs-12 temperatrue">27.6<sup>℃</sup></div>
+        </div> 
+        <div class="row city_detail"> 
+         <div class="col-xs-3"> 
+          <div class="row">
+           <i class="iconfont icon-humidity"></i>
+          </div> 
+          <div class="row">
+           降水
+          </div> 
+          <div class="row">0mm</div> 
+         </div> 
+         <div class="col-xs-3"> 
+          <div class="row">
+           <i class="iconfont icon-Windpower"></i>
+          </div> 
+          <div class="row">东南风</div> 
+          <div class="row">微风</div> 
+         </div> 
+         <div class="col-xs-3"> 
+          <div class="row">
+           <i class="iconfont icon-humidity"></i>
+          </div> 
+          <div class="row">
+           相对湿度
+          </div> 
+          <div class="row">82%</div> 
+         </div> 
+         <div class="col-xs-3"> 
+          <div class="row">
+           <i class="iconfont icon-qiya"></i>
+          </div> 
+          <div class="row">
+           气压
+          </div> 
+          <div class="row">987hpa</div> 
+         </div> 
+        </div> 
+       </div> 
+       <div class="col-xs-8" id="day7Div"><div class="day-item today" style="width:14.285714285714286%">	<div class="day-date">今天<br>04/24</div>	<div class="day-icon"><img src="/static/img/w/icon/w3.png"></div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="">29℃/24℃</div>	<div class="">阵雨转多云</div>	<div class="">微风</div></div><div class="day-item " style="width:14.285714285714286%">	<div class="day-date">明天<br>04/25</div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="day-icon"><img src="/static/img/w/icon/w3.png"></div>	<div class="">33℃/22℃</div>	<div class="">多云转阵雨</div>	<div class="">微风</div></div><div class="day-item " style="width:14.285714285714286%">	<div class="day-date">后天<br>04/26</div>	<div class="day-icon"><img src="/static/img/w/icon/w3.png"></div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="">31℃/24℃</div>	<div class="">阵雨转多云</div>	<div class="">微风</div></div><div class="day-item " style="width:14.285714285714286%">	<div class="day-date">周六<br>04/27</div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="">32℃/25℃</div>	<div class="">多云</div>	<div class="">微风</div></div><div class="day-item " style="width:14.285714285714286%">	<div class="day-date">周日<br>04/28</div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="">33℃/24℃</div>	<div class="">多云</div>	<div class="">微风</div></div><div class="day-item " style="width:14.285714285714286%">	<div class="day-date">周一<br>04/29</div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="day-icon"><img src="/static/img/w/icon/w1.png"></div>	<div class="">33℃/24℃</div>	<div class="">多云</div>	<div class="">微风</div></div><div class="day-item " style="width:14.285714285714286%">	<div class="day-date">周二<br>04/30</div>	<div class="day-icon"><img src="/static/img/w/icon/w3.png"></div>	<div class="day-icon"><img src="/static/img/w/icon/w3.png"></div>	<div class="">32℃/22℃</div>	<div class="">阵雨</div>	<div class="">微风</div></div></div> 
+      </div> </a> 
+     <div class="row"> 
+      <!--左侧幻灯片 start--> 
+      <!--左侧幻灯片 end--> 
+      <!--右侧我的天气 start--> 
+      <div class="col-xs-4"> 
+       <div class="hp"> 
+        <div class="hd icon_rmcs">
+         实况排行
+        </div> 
+        <div class="hb" style="height:380px;padding:0;"> 
+         <ul class="nav nav-tabs tab2 tabrank" role="tablist"> 
+          <li class="active"><a href="#HOT" data-toggle="tab" aria-expanded="true">今日高温</a></li> 
+          <li class=""><a href="#HB" data-toggle="tab" aria-expanded="false">今日低温</a></li> 
+          <li class=""><a href="#DB" data-toggle="tab">昼夜温差</a></li> 
+          <li class=""><a href="#HD" data-toggle="tab">24小时降水</a></li> 
+         </ul> 
+         <div class="tab-content" style="overflow: hidden; border-top:1px solid #ddd; padding:4px;"> 
+          <div class="tab-pane active" id="HOT"> 
+           <a href="#" class="order order-header"> 
+            <div class="rank">
+             排名
+            </div> 
+            <div class="sname">
+             城市
+            </div> 
+            <div class="pname">
+             省份
+            </div> 
+            <div class="value">
+             最高温度
+            </div> </a> 
+           <a href="/weather/56966" class="order"> 
+            <div class="rank">
+             1
+            </div> 
+            <div class="sname">
+             元江
+            </div> 
+            <div class="pname">
+             云南
+            </div> 
+            <div class="value">
+             40.5℃
+            </div> </a> 
+           <a href="/weather/56959" class="order"> 
+            <div class="rank">
+             2
+            </div> 
+            <div class="sname">
+             景洪
+            </div> 
+            <div class="pname">
+             云南
+            </div> 
+            <div class="value">
+             38.3℃
+            </div> </a> 
+           <a href="/weather/59847" class="order"> 
+            <div class="rank">
+             3
+            </div> 
+            <div class="sname">
+             昌江
+            </div> 
+            <div class="pname">
+             海南
+            </div> 
+            <div class="value">
+             38.1℃
+            </div> </a> 
+           <a href="/weather/56969" class="order"> 
+            <div class="rank">
+             4
+            </div> 
+            <div class="sname">
+             勐腊
+            </div> 
+            <div class="pname">
+             云南
+            </div> 
+            <div class="value">
+             38.1℃
+            </div> </a> 
+           <a href="/weather/51571" class="order"> 
+            <div class="rank">
+             5
+            </div> 
+            <div class="sname">
+             托克逊
+            </div> 
+            <div class="pname">
+             新疆
+            </div> 
+            <div class="value">
+             38℃
+            </div> </a> 
+           <a href="/weather/56975" class="order"> 
+            <div class="rank">
+             6
+            </div> 
+            <div class="sname">
+             红河
+            </div> 
+            <div class="pname">
+             云南
+            </div> 
+            <div class="value">
+             37.1℃
+            </div> </a> 
+           <a href="/weather/59848" class="order"> 
+            <div class="rank">
+             7
+            </div> 
+            <div class="sname">
+             白沙
+            </div> 
+            <div class="pname">
+             海南
+            </div> 
+            <div class="value">
+             36.3℃
+            </div> </a> 
+           <a href="/weather/59940" class="order"> 
+            <div class="rank">
+             8
+            </div> 
+            <div class="sname">
+             乐东
+            </div> 
+            <div class="pname">
+             海南
+            </div> 
+            <div class="value">
+             36.2℃
+            </div> </a> 
+           <a href="/weather/59854" class="order"> 
+            <div class="rank">
+             9
+            </div> 
+            <div class="sname">
+             屯昌
+            </div> 
+            <div class="pname">
+             海南
+            </div> 
+            <div class="value">
+             36.1℃
+            </div> </a> 
+           <a href="/weather/59845" class="order"> 
+            <div class="rank">
+             10
+            </div> 
+            <div class="sname">
+             儋州
+            </div> 
+            <div class="pname">
+             海南
+            </div> 
+            <div class="value">
+             35.9℃
+            </div> </a> 
+           <div class="describe">
+            根据今日00时至18时整点实况资料统计
+           </div> 
+          </div> 
+          <div class="tab-pane" id="HB"> 
+           <a href="#" class="order order-header"> 
+            <div class="rank">
+             排名
+            </div> 
+            <div class="sname">
+             城市
+            </div> 
+            <div class="pname">
+             省份
+            </div> 
+            <div class="value">
+             最低温度
+            </div> </a> 
+           <a href="/weather/55178" class="order"> 
+            <div class="rank">
+             1
+            </div> 
+            <div class="sname">
+             双湖
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -12.7℃
+            </div> </a> 
+           <a href="/weather/55234" class="order"> 
+            <div class="rank">
+             2
+            </div> 
+            <div class="sname">
+             革吉
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -11.2℃
+            </div> </a> 
+           <a href="/weather/55542" class="order"> 
+            <div class="rank">
+             3
+            </div> 
+            <div class="sname">
+             仲巴
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -9.9℃
+            </div> </a> 
+           <a href="/weather/55357" class="order"> 
+            <div class="rank">
+             4
+            </div> 
+            <div class="sname">
+             措勤
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -9.5℃
+            </div> </a> 
+           <a href="/weather/55248" class="order"> 
+            <div class="rank">
+             5
+            </div> 
+            <div class="sname">
+             改则
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -9℃
+            </div> </a> 
+           <a href="/weather/55656" class="order"> 
+            <div class="rank">
+             6
+            </div> 
+            <div class="sname">
+             珠峰大本营
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -8.3℃
+            </div> </a> 
+           <a href="/weather/55294" class="order"> 
+            <div class="rank">
+             7
+            </div> 
+            <div class="sname">
+             安多
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -7.7℃
+            </div> </a> 
+           <a href="/weather/55554" class="order"> 
+            <div class="rank">
+             8
+            </div> 
+            <div class="sname">
+             萨嘎
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -7.3℃
+            </div> </a> 
+           <a href="/weather/55228" class="order"> 
+            <div class="rank">
+             9
+            </div> 
+            <div class="sname">
+             狮泉河
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -7℃
+            </div> </a> 
+           <a href="/weather/55664" class="order"> 
+            <div class="rank">
+             10
+            </div> 
+            <div class="sname">
+             定日
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             -6.9℃
+            </div> </a> 
+           <div class="describe">
+            根据今日00时至18时整点实况资料统计
+           </div> 
+          </div> 
+          <div class="tab-pane " id="DB"> 
+           <a href="#" class="order order-header"> 
+            <div class="rank">
+             排名
+            </div> 
+            <div class="sname">
+             城市
+            </div> 
+            <div class="pname">
+             省份
+            </div> 
+            <div class="value">
+             温差
+            </div> </a> 
+           <a href="/weather/52679" class="order"> 
+            <div class="rank">
+             1
+            </div> 
+            <div class="sname">
+             武威
+            </div> 
+            <div class="pname">
+             甘肃
+            </div> 
+            <div class="value">
+             25.2℃
+            </div> </a> 
+           <a href="/weather/52436" class="order"> 
+            <div class="rank">
+             2
+            </div> 
+            <div class="sname">
+             玉门
+            </div> 
+            <div class="pname">
+             甘肃
+            </div> 
+            <div class="value">
+             24.2℃
+            </div> </a> 
+           <a href="/weather/52447" class="order"> 
+            <div class="rank">
+             3
+            </div> 
+            <div class="sname">
+             金塔
+            </div> 
+            <div class="pname">
+             甘肃
+            </div> 
+            <div class="value">
+             24.1℃
+            </div> </a> 
+           <a href="/weather/53619" class="order"> 
+            <div class="rank">
+             4
+            </div> 
+            <div class="sname">
+             灵武
+            </div> 
+            <div class="pname">
+             宁夏
+            </div> 
+            <div class="value">
+             24℃
+            </div> </a> 
+           <a href="/weather/52418" class="order"> 
+            <div class="rank">
+             5
+            </div> 
+            <div class="sname">
+             敦煌
+            </div> 
+            <div class="pname">
+             甘肃
+            </div> 
+            <div class="value">
+             23.8℃
+            </div> </a> 
+           <a href="/weather/53732" class="order"> 
+            <div class="rank">
+             6
+            </div> 
+            <div class="sname">
+             河南
+            </div> 
+            <div class="pname">
+             内蒙古
+            </div> 
+            <div class="value">
+             23.6℃
+            </div> </a> 
+           <a href="/weather/56065" class="order"> 
+            <div class="rank">
+             7
+            </div> 
+            <div class="sname">
+             河南
+            </div> 
+            <div class="pname">
+             青海
+            </div> 
+            <div class="value">
+             23.6℃
+            </div> </a> 
+           <a href="/weather/52884" class="order"> 
+            <div class="rank">
+             8
+            </div> 
+            <div class="sname">
+             皋兰
+            </div> 
+            <div class="pname">
+             甘肃
+            </div> 
+            <div class="value">
+             23.5℃
+            </div> </a> 
+           <a href="/weather/53723" class="order"> 
+            <div class="rank">
+             9
+            </div> 
+            <div class="sname">
+             盐池
+            </div> 
+            <div class="pname">
+             宁夏
+            </div> 
+            <div class="value">
+             23.2℃
+            </div> </a> 
+           <a href="/weather/52675" class="order"> 
+            <div class="rank">
+             10
+            </div> 
+            <div class="sname">
+             金昌
+            </div> 
+            <div class="pname">
+             甘肃
+            </div> 
+            <div class="value">
+             22.8℃
+            </div> </a> 
+           <div class="describe">
+            根据今日00时至00时整点实况资料统计
+           </div> 
+          </div> 
+          <div class="tab-pane " id="HD"> 
+           <a href="#" class="order order-header"> 
+            <div class="rank">
+             排名
+            </div> 
+            <div class="sname">
+             城市
+            </div> 
+            <div class="pname">
+             省份
+            </div> 
+            <div class="value">
+             降水量
+            </div> </a> 
+           <a href="/weather/56319" class="order"> 
+            <div class="rank">
+             1
+            </div> 
+            <div class="sname">
+             墨脱
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             64.3mm
+            </div> </a> 
+           <a href="/weather/56434" class="order"> 
+            <div class="rank">
+             2
+            </div> 
+            <div class="sname">
+             察隅
+            </div> 
+            <div class="pname">
+             西藏
+            </div> 
+            <div class="value">
+             63.9mm
+            </div> </a> 
+           <a href="/weather/59113" class="order"> 
+            <div class="rank">
+             3
+            </div> 
+            <div class="sname">
+             永定
+            </div> 
+            <div class="pname">
+             福建
+            </div> 
+            <div class="value">
+             60.4mm
+            </div> </a> 
+           <a href="/weather/59304" class="order"> 
+            <div class="rank">
+             4
+            </div> 
+            <div class="sname">
+             紫金
+            </div> 
+            <div class="pname">
+             广东
+            </div> 
+            <div class="value">
+             52.5mm
+            </div> </a> 
+           <a href="/weather/59122" class="order"> 
+            <div class="rank">
+             5
+            </div> 
+            <div class="sname">
+             长泰
+            </div> 
+            <div class="pname">
+             福建
+            </div> 
+            <div class="value">
+             49.3mm
+            </div> </a> 
+           <a href="/weather/58932" class="order"> 
+            <div class="rank">
+             6
+            </div> 
+            <div class="sname">
+             永泰
+            </div> 
+            <div class="pname">
+             福建
+            </div> 
+            <div class="value">
+             44.9mm
+            </div> </a> 
+           <a href="/weather/58944" class="order"> 
+            <div class="rank">
+             7
+            </div> 
+            <div class="sname">
+             平潭
+            </div> 
+            <div class="pname">
+             福建
+            </div> 
+            <div class="value">
+             43.8mm
+            </div> </a> 
+           <a href="/weather/59126" class="order"> 
+            <div class="rank">
+             8
+            </div> 
+            <div class="sname">
+             漳州
+            </div> 
+            <div class="pname">
+             福建
+            </div> 
+            <div class="value">
+             41.4mm
+            </div> </a> 
+           <a href="/weather/59134" class="order"> 
+            <div class="rank">
+             9
+            </div> 
+            <div class="sname">
+             厦门
+            </div> 
+            <div class="pname">
+             福建
+            </div> 
+            <div class="value">
+             39mm
+            </div> </a> 
+           <a href="/weather/59124" class="order"> 
+            <div class="rank">
+             10
+            </div> 
+            <div class="sname">
+             南靖
+            </div> 
+            <div class="pname">
+             福建
+            </div> 
+            <div class="value">
+             29.6mm
+            </div> </a> 
+           <div class="describe">
+            根据2024年04月24日18时实况资料统计
+           </div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </div> 
+      <!--右侧我的天气 end--> 
+     </div> 
+     <div class="row mt15"> 
+      <div class="col-xs-8"> 
+                
+        <div id="hp">
+            <div class="hd icon_weather">
+                天气预报
+               </div>
+                    <div class="hb leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" id="map" style="height:606px;position:relative;" tabindex="0"> 
+                        <div id="provinceSelector">
+                            <label for="provinceSelect"></label>
+                            <select id="provinceSelect" onchange="moveMapAndHighlight()">
+                                <option value="all">全国</option>
+                                <!-- 省份选项将在此动态添加 -->
+                            </select>
+                            <script>
+                                var provinceData = JSON.parse("{{ capital_data_json|escapejs }}");
+                    
+                                // 获取省份选择的下拉菜单元素
+                                var selectElement = document.getElementById("provinceSelect");
+                    
+                                // 循环遍历省份数据，为每个省份创建一个选项
+                                Object.keys(provinceData).forEach(function(province) {
+                                    // 创建 <option> 元素
+                                    var optionElement = document.createElement("option");
+                                    // 设置选项的值和显示文本为省份名称
+                                    optionElement.value = province;
+                                    optionElement.textContent = province;
+                                    // 将选项添加到下拉菜单中
+                                    selectElement.appendChild(optionElement);
+                                });
+                            </script>
+                        </div>
+                        <div id="map"></div>
+                    <script src="{% static 'leaflet.js' %}"></script>
+                    <script>
+                        var map = L.map('map', {
+                            center: [35, 105], // 中国的中心点经纬度
+                            zoom: 4, // 初始缩放级别
+                            minZoom: 4 // 最小缩放级别
+                        });
+                
+                        L.tileLayer('https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {}).addTo(map);
+                        //L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+                        var provincesLayer = null;
+                
+                        // 加载省份边界数据
+                        var chinaProvince = JSON.parse("{{ china_province|escapejs }}");
+                
+                        function moveMapAndHighlight() {
+                            // 获取选中的省份名称
+                            var selectedProvince = document.getElementById("provinceSelect").value;
+                            
+                            if (selectedProvince === "all") {
+                                // 如果选择了“全国”，则将地图移动到初始状态
+                                map.setView([35, 105], 4); // 设置地图中心和缩放级别
+                                // 移除高亮图层
+                                if (provincesLayer) {
+                                    map.removeLayer(provincesLayer);
+                                    provincesLayer = null; // 将高亮图层置为 null
+                                }
+                                return; // 结束函数执行
+                            }
+                            // 查找选中省份的特征对象
+                            var selectedProvinceFeature = chinaProvince.features.find(function(feature) {
+                                return feature.properties.name === selectedProvince;
+                            });
+                        
+                            // 如果找到了选中省份的特征对象
+                            if (selectedProvinceFeature) {
+                                // 获取选中省份的边界框
+                                var bounds = L.geoJSON(selectedProvinceFeature).getBounds();
+                                // 将地图缩放到选中省份的边界框内
+                                map.fitBounds(bounds, { animate: true });
+                        
+                                // 移除之前的高亮图层
+                                if (provincesLayer) {
+                                    map.removeLayer(provincesLayer);
+                                }
+                        
+                                // 创建新的高亮图层，并添加到地图上
+                                provincesLayer = L.geoJSON(selectedProvinceFeature, {
+                                    style: function(feature) {
+                                        return {
+                                            color: 'blue',
+                                            weight: 2
+                                        };
+                                    }
+                                }).addTo(map);
+                            }
+                        }
+                        
+                        
+                        
+                        // 使用后端传递的城市数据
+                        var cityData = JSON.parse("{{city_data_json|escapejs}}")
+                        //console.log(cityData)
+                        //var capitalData = JSON.parse('{{ capital_data_json|escapejs }}');
+                        
+                        
+                        // 创建空数组来存储标记
+                        var district_markers = [];
+                        var city_markers = [];
+                        var capital_markers = [];
+                        var special_markers = [];
+                        //console.log(cityData[1])
+                
+                        // 遍历每个城市，并在地图上添加标记
+                        Object.values(cityData).forEach(city => {
+                            //console.log(city[1])
+                            city = city.fields;
+                            //console.log(city);
+                            
+                            // 创建自定义标记图标的 HTML 内容
+                            var imageUrl = "/static/img/w/icon/w" + city.m_weather_img + ".png";
+                            var imageAlt = city.m_weather_img + ".png";
+                            var customIconContent = `
+                                <div class="custom-marker" style="display: flex; align-items: center;">
+                                    <div style="display: flex; align-items: center; background-color: navy;">
+                                        <img src="${imageUrl}" alt="${imageAlt}" style="width: 40px; height: auto;">
+                                    </div>
+                                    <div>
+                                        <div style="margin-left: 5px; text-align: center;">
+                                            <div style="font-size: 4px;">${city.city}</div>
+                                            <div style="font-size: 4px;">${city.high_temp}/${city.low_temp}℃</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            var specialIconContent = `
+                            <div style="display: inline-block; align-items: center; background-color: navy;">
+                                <img src="${imageUrl}" alt="${imageAlt}" style="width: 40px; height: auto;">
+                            </div>
+                            `;
+                
+                            // 创建自定义标记图标
+                            var customIcon = L.divIcon({
+                                className: 'custom-div-icon',
+                                html: customIconContent,
+                                iconSize: [10, 10], // 图标大小
+                                iconAnchor: [50, 50], // 图标锚点（中心）
+                            });
+                            var specialIcon = L.divIcon({
+                                className: 'special-div-icon',
+                                html: specialIconContent,
+                                iconSize: [10, 10], // 图标大小
+                                iconAnchor: [50, 50], // 图标锚点（中心）
+                            });
+                            var marker = L.marker(
+                                [city.latitude, city.longitude],
+                                { icon: customIcon }
+                            )
+                            
+                
+                            // 使用split方法将日期字符串按照"/"分割成数组
+                            var dateParts = "{{DateTime}}".split("/");
+                
+                            // 创建自定义弹出框的 HTML 内容
+                            var popupContent = `
+                                <div>
+                                    <h3>${city.city}${dateParts[1]}月${dateParts[2]}日天气预报</h3>
+                                    <p style="text-align: right; font-size: 16px;">${city.m_weather_name}</p>
+                                    <p style="text-align: right; font-size: 16px;">${city.low_temp}/${city.high_temp}℃</p>
+                                    <p style="text-align: right; font-size: 16px;">${city.m_wind_direction} ${city.m_wind_power}</p>
+                                    <a href='../../wheather/${city.url}' style="display: block; text-align: center; font-size: 16px;">
+                                        查看未来7天预报
+                                    </a>
+                                </div>
+                            `;
+                
+                            // 创建自定义弹出框
+                            var customPopup = L.popup().setContent(popupContent);
+                
+                            // 设置标记的弹出框内容
+                            marker.bindPopup(
+                                customPopup,
+                                { offset: L.point(0, -40) }
+                            );
+                
+                            // 添加标记到地图上
+                            if (city.type <= 1) {
+                                capital_markers.push(marker);
+                                // 特殊处理只显示图像的情况
+                                var marker_sp = L.marker(
+                                    [city.latitude, city.longitude],
+                                    { icon: specialIcon }
+                                ).bindPopup(
+                                    customPopup,
+                                    { offset: L.point(-30, -40) }
+                                );
+                                special_markers.push(marker_sp)
+                                marker_sp.addTo(map);
+                            }
+                            else if (city.type == 2) {
+                                city_markers.push(marker);
+                            }
+                            else {
+                                district_markers.push(marker);
+                            }
+                        });
+                
+                        // 监听地图缩放事件
+                        map.on('zoomend', function() {
+                            var zoomLevel = map.getZoom();
+                            var textshow = 6
+                            var smallzoom = 8
+                            var bigzoom = 10
+                            // 根据缩放级别调整标记的显示
+                            district_markers.forEach(marker => {
+                                // 判断当前缩放级别是否在标记的显示范围内
+                                if (zoomLevel >= bigzoom) {
+                                    // 在显示范围内，则添加到地图上
+                                    marker.addTo(map);
+                                } else {
+                                    // 不在显示范围内，则从地图上移除
+                                    map.removeLayer(marker);
+                                }
+                            });
+                            city_markers.forEach(marker => {
+                                // 判断当前缩放级别是否在标记的显示范围内
+                                if (zoomLevel >= smallzoom) {
+                                    // 在显示范围内，则添加到地图上
+                                    marker.addTo(map);
+                                } else {
+                                    // 不在显示范围内，则从地图上移除
+                                    map.removeLayer(marker);
+                                }
+                            });
+                            capital_markers.forEach(marker => {
+                                // 判断当前缩放级别是否在标记的显示范围内
+                                if (zoomLevel >= textshow) {
+                                    // 在显示范围内，则添加到地图上
+                                    marker.addTo(map);
+                                } else {
+                                    // 不在显示范围内，则从地图上移除
+                                    map.removeLayer(marker);
+                                }
+                            });
+                            special_markers.forEach(marker => {
+                                // 判断当前缩放级别是否在标记的显示范围内
+                                if (zoomLevel < textshow) {
+                                    // 在显示范围内，则添加到地图上
+                                    marker.addTo(map);
+                                } else {
+                                    // 不在显示范围内，则从地图上移除
+                                    map.removeLayer(marker);
+                                }
+                            });
+                            
+                        });
+                        
+                        // 创建一个自定义控件
+                        var zoomLevelControl = L.control();
+                
+                        // 定义控件的位置和外观
+                        zoomLevelControl.onAdd = function(map) {
+                            var div = L.DomUtil.create('div', 'zoom-level-control');
+                            div.innerHTML = 'Zoom Level: ' + map.getZoom();
+                            return div;
+                        };
+                
+                        // 将控件添加到地图上的右上角
+                        zoomLevelControl.addTo(map);
+                
+                        // 监听地图的缩放事件，更新控件中的缩放级别显示
+                        map.on('zoomend', function() {
+                            document.querySelector('.zoom-level-control').innerHTML = 'Zoom Level: ' + map.getZoom();
+                        });
+                    </script>
+            </div>
+        </div>
+      </div> 
+      <div class="col-xs-4"> 
+       <div class="hp"> 
+        <div class="hd icon_alarm">
+         气象预警
+         <a href="/alarm/map" class="more">更多</a>
+        </div> 
+        <div class="hb" style="height:270px;"> 
+         <!--预警信号 start--> 
+         <div class="row alarm-item"> 
+          <div class="col-xs-12"> 
+           <a target="_blank" href="/alarm/13000041600000_20240424161528" class="alarm-title" title="河北省发布大风蓝色预警"> <img src="http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B06_BLUE.png" onerror="this.onerror='';this.src='http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_BLUE.png';"> 河北省发布大风蓝色预警 </a> 
+          </div> 
+         </div> 
+         <div class="row alarm-item"> 
+          <div class="col-xs-12"> 
+           <a target="_blank" href="/alarm/14000041600000_20240424100059" class="alarm-title" title="山西省发布大风蓝色预警"> <img src="http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B06_BLUE.png" onerror="this.onerror='';this.src='http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_BLUE.png';"> 山西省发布大风蓝色预警 </a> 
+          </div> 
+         </div> 
+         <div class="row alarm-item"> 
+          <div class="col-xs-12"> 
+           <a target="_blank" href="/alarm/36000041600000_20240424055028" class="alarm-title" title="江西省发布大雾黄色预警"> <img src="http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B17_YELLOW.png" onerror="this.onerror='';this.src='http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_YELLOW.png';"> 江西省发布大雾黄色预警 </a> 
+          </div> 
+         </div> 
+         <div class="row alarm-item"> 
+          <div class="col-xs-12"> 
+           <a target="_blank" href="/alarm/21050041600000_20240424182900" class="alarm-title" title="辽宁省本溪市发布大风蓝色预警"> <img src="http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B06_BLUE.png" onerror="this.onerror='';this.src='http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_BLUE.png';"> 辽宁省本溪市发布大风蓝色预警 </a> 
+          </div> 
+         </div> 
+         <div class="row alarm-item"> 
+          <div class="col-xs-12"> 
+           <a target="_blank" href="/alarm/13040041600000_20240424182720" class="alarm-title" title="河北省邯郸市发布大风蓝色预警"> <img src="http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B06_BLUE.png" onerror="this.onerror='';this.src='http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_BLUE.png';"> 河北省邯郸市发布大风蓝色预警 </a> 
+          </div> 
+         </div> 
+         <div class="row alarm-item"> 
+          <div class="col-xs-12"> 
+           <a target="_blank" href="/alarm/54040041600000_20240424182014" class="alarm-title" title="发布强降雨蓝色预警"> <img src="http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_BLUE.png" onerror="this.onerror='';this.src='http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_BLUE.png';"> 发布强降雨蓝色预警 </a> 
+          </div> 
+         </div> 
+         <div class="row alarm-item"> 
+          <div class="col-xs-12"> 
+           <a target="_blank" href="/alarm/35090041600000_20240424180000" class="alarm-title" title="福建省宁德市发布大雾黄色预警"> <img src="http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B17_YELLOW.png" onerror="this.onerror='';this.src='http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_YELLOW.png';"> 福建省宁德市发布大雾黄色预警 </a> 
+          </div> 
+         </div> 
+         <div class="row alarm-item"> 
+          <div class="col-xs-12"> 
+           <a target="_blank" href="/alarm/36070041600000_20240424180201" class="alarm-title" title="江西省赣州市发布雷电黄色预警"> <img src="http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B14_YELLOW.png" onerror="this.onerror='';this.src='http://data.cma.cn/dataGis/static/ultra/img/gis/disasterWarning/11B99_YELLOW.png';"> 江西省赣州市发布雷电黄色预警 </a> 
+          </div> 
+         </div> 
+         <!--预警信号 end--> 
+        </div> 
+       </div> 
+       <div class="hp mt15"> 
+        <div class="hd icon_tqzx">
+         天气资讯
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/" target="_blank" class="more">更多</a>
+        </div> 
+        <div class="hb"> 
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/202404/t20240424_6219239" title="江南华南等地有强降水和强对流" class="newitem" target="_blank">江南华南等地有强降水和强对流</a> 
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/202404/t20240423_6218933" title="24日至26日江南华南将再度出现强降雨 广东广西等地需持续做好暴雨灾害防御" class="newitem" target="_blank">24日至26日江南华南将再度出现强降雨 广东广西等地需持续做好暴雨灾害防御</a> 
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/202404/t20240423_6216549" title="江南华南等地有强降水和强对流" class="newitem" target="_blank">江南华南等地有强降水和强对流</a> 
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/202404/t20240422_6213602" title="华南等地有强降水和强对流" class="newitem" target="_blank">华南等地有强降水和强对流</a> 
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/202404/t20240421_6213187" title="江南东部和华南等地有强降水和强对流" class="newitem" target="_blank">江南东部和华南等地有强降水和强对流</a> 
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/202404/t20240420_6212801" title="江南华南贵州等地有强降水和强对流 东部海域有大风" class="newitem" target="_blank">江南华南贵州等地有强降水和强对流 东部海域有大风</a> 
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/202404/t20240419_6211575" title="19日夜间至22日华南江南将有强降雨天气过程" class="newitem" target="_blank">19日夜间至22日华南江南将有强降雨天气过程</a> 
+         <a href="http://www.cma.gov.cn/2011xwzx/2011xqxxw/2011xzytq/202404/t20240419_6209217" title="江南华南贵州等地有强降水和强对流 内蒙古宁夏华北西部等地有大风降温" class="newitem" target="_blank">江南华南贵州等地有强降水和强对流 内蒙古宁夏华北西部等地有大风降温</a> 
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+     
+{% endblock %}
