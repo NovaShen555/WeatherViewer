@@ -1468,7 +1468,7 @@
                 
                         // 遍历每个城市，并在地图上添加标记
                         Object.values(cityData).forEach(city => {
-                            //console.log(city[1])
+                            console.log(city)
                             city[4]=Math.round(city[4]);
                             city[6]=Math.round(city[6]);
                             
@@ -1482,8 +1482,8 @@
                                     </div>
                                     <div>
                                         <div style="margin-left: 5px; text-align: center;">
-                                            <div style="font-size: 4px;">${city[1]}</div>
-                                            <div style="font-size: 4px;">${city[4]}/${city[6]}℃</div>
+                                            <div style="font-size: 13px;">${city[1]}</div>
+                                            <div style="font-size: 13px;">${city[4]}/${city[6]}℃</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1517,16 +1517,21 @@
                             // 使用split方法将日期字符串按照"/"分割成数组
                             var dateParts = cityAllData.data.date.split("/");
                 
-                            // 创建自定义弹出框的 HTML 内容
+                            var weatherInfo = city[7] == 9999 ? (city[12] == 9999 ?  '' : city[12]) : (city[12] == 9999 ? city[7] : (city[7] == city[12] ? city[7] : city[7] + '转' + city[12]));
+                            var tempInfo = city[11] == 9999 ? (city[6] == 9999 ?  '' : city[6]) : (city[6] == 9999 ? city[11] : (city[6] + ' / ' + city[11]));
+                            var windInfo = (city[14] == 9999 || city[14] == '无持续风向') ? (city[15] == 9999 ?  '' : city[15]) : (city[15] == 9999 ? city[14] : (city[14] + ' ' + city[15]));
+				            // 创建自定义弹出框的 HTML 内容
                             var popupContent = `
-                                <div>
-                                    <h3>${city[1]}${dateParts[1]}月${dateParts[2]}日天气预报</h3>
-                                    <p style="text-align: right; font-size: 16px;">${city[7]}</p>
-                                    <p style="text-align: right; font-size: 16px;">${city[4]}/${city[6]}℃</p>
-                                    <p style="text-align: right; font-size: 16px;">${city[10]} ${city[11]}</p>
-                                    <a href='../../wheather/${city[0]}' style="display: block; text-align: center; font-size: 16px;">
-                                        查看未来7天预报
-                                    </a>
+                                <div class="mypopup">
+                                    <div class="popup-title">${city[1]}${dateParts[1]}月${dateParts[2]}日预报</div>
+                                    <div class="popup-content popup-border" style="margin:0; padding:10px;">
+                                    <table class="popup-table">
+                                    <tr><td rowspan="3"><img src="${imageUrl}" style="height:60px;"/></td><td>${weatherInfo}</td></tr>
+                                    <tr><td>${tempInfo}℃</td></tr>
+                                    <tr><td>${windInfo}</td></tr>
+                                    <tr><td colspan="2" class="text-center"><a href="/weather/${city[0]}.html">查看未来7天预报</a></td></tr>
+                                    </table>
+                                    </div>
                                 </div>
                             `;
                 
