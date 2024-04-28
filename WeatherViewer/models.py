@@ -13,3 +13,9 @@ class bulletinData(models.Model):
     tid = models.IntegerField()
     title = models.CharField(max_length=50)
     content = models.TextField()
+
+class weatherData(models.Model):
+    city_id = models.IntegerField()
+    upper_content = models.TextField()
+    lower_content = models.TextField()
+    update_date = models.DateField()

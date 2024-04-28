@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from lxml import html, etree
 from datetime import datetime
 
-from WeatherViewer.models import bulletinData, CityInfo
+from WeatherViewer.models import bulletinData, CityInfo, weatherData
 from static.utils.data.province_border import province_border
 from static.utils.data.province_data import province_data
 
@@ -39,24 +39,11 @@ def search_results(request):
     return HttpResponsePermanentRedirect("/home")
 
 
-def search_ex(request):
-    return render(request, 'test_data3.html')
-
-
 def weather_map(request):
     head = "https://weather.cma.cn/api/map/weather/1?t="
     url = head + str(int(time.time() * 1000))
     response = requests.get(url)
     city_data = response.text
-    """
-    # 将中心点坐标添加到 GeoJSON 数据中的属性中
-    for feature in china_province['features']:
-        province_name = feature['properties']['name']
-        if province_name in capital_data:
-            # 使用列表解析将字符串转换为浮点数列表
-            coordinates = [float(coord) for coord in capital_data[province_name]]
-            feature['properties']['centroid'] = coordinates
-    """
     return render(request, 'weathermap.html', {
         'city_data_json': city_data
     })
@@ -137,24 +124,38 @@ def alarm_map(request):
 def get_city_weather(request, city_index):
     print(city_index)
 
-    url = 'https://weather.cma.cn/web/weather/' + str(city_index)
-    response = requests.get(url)
-    response.encoding = 'utf-8'
-    html_content = response.content
-    tree = html.fromstring(html_content)
-    # 应用XPath表达式，选择需要的元素
-    head_data = tree.xpath('/html/body/div[1]/div')
-    print(html.tostring(head_data[0], pretty_print=True).decode())
-    with open("templates/view_weather.html", "w", encoding='utf-8') as f:
-        f.write(html.tostring(head_data[0], pretty_print=True).decode())
+    # url = 'https://weather.cma.cn/web/weather/' + str(city_index)
+    # response = requests.get(url)
+    # response.encoding = 'utf-8'
+    # html_content = response.content
+    # tree = html.fromstring(html_content)
+    # # 应用XPath表达式，选择需要的元素
+    # head_data = tree.xpath('/html/body/div[1]/div')
+    # print(html.tostring(head_data[0], pretty_print=True).decode())
+    # with open("templates/view_weather.html", "w", encoding='utf-8') as f:
+    #     f.write(html.tostring(head_data[0], pretty_print=True).decode())
+    #
+    # with open("templates/city_weather_from_web.html", "w", encoding='utf-8') as f:
+    #     f.write(html.tostring(head_data[1], pretty_print=True).decode())
+    #
+    # qwe = requests.get(url)
+    # if qwe.status_code != 200:
+    #     return jumptohome(request)
 
-    with open("templates/city_weather_from_web.html", "w", encoding='utf-8') as f:
-        f.write(html.tostring(head_data[1], pretty_print=True).decode())
 
-    qwe = requests.get(url)
-    if qwe.status_code != 200:
-        return jumptohome(request)
-    return render(request, "city_weather.html")
+    weather = weatherData.objects.filter(city_id=city_index)
+    if weather:
+        weather = weather[0]
+        update_date = weather.update_date
+        upper = weather.upper_content
+        lower = weather.lower_content
+        return render(request, "city_weather.html", {
+            'upper': upper,
+            'lower': lower,
+            'update_date': update_date
+        })
+
+    return HttpResponsePermanentRedirect("/home")
 
 def redirect_to_file(request):
     original_uri = request.get_full_path()
@@ -167,12 +168,26 @@ def test(request):
     response = requests.get(url)
     data = response.json()
     cities = [
-        {'url': "../weather/" + sublist[0], 'name': sublist[1],'WeatherUpdateDate':data["data"]["date"].replace("/","-")}
+        {'id':sublist[0],'url': "../weather/" + sublist[0], 'name': sublist[1],'WeatherUpdateDate':data["data"]["date"].replace("/","-")}
         for sublist in data['data']['city']
     ]
-    CityInfo.objects.all().delete()
+
     for city in cities:
+        time.sleep(1)
         print(city)
-        new_city = CityInfo(cityname=city['name'], cityurl=city['url'], WeatherUpdateDate=city['WeatherUpdateDate'])
-        new_city.save()
+        url = 'https://weather.cma.cn/web/weather/' + city['url'].split("/")[-1]
+        print(url)
+        resp = requests.get(url)
+        resp.encoding = 'utf-8'
+        html_content = resp.content
+        tree = html.fromstring(html_content)
+        # 应用XPath表达式，选择需要的元素
+        head_data = tree.xpath('/html/body/div[1]/div')
+
+        upper = html.tostring(head_data[0], pretty_print=True).decode()
+        lower = html.tostring(head_data[1], pretty_print=True).decode()
+
+        city_weather = weatherData(city_id=city['id'], upper_content=upper, lower_content=lower, update_date=city['WeatherUpdateDate'])
+        city_weather.save()
+
     return HttpResponse("1")
