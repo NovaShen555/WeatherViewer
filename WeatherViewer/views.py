@@ -1,10 +1,11 @@
+from django.db.models import Max
 from django.shortcuts import render, redirect
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponsePermanentRedirect
 import requests
 import time
 from bs4 import BeautifulSoup
-from lxml import html,etree
+from lxml import html, etree
 from datetime import datetime
 
 from WeatherViewer.models import bulletinData
@@ -14,6 +15,7 @@ from static.utils.data.province_data import province_data
 
 def jumptohome(request):
     return redirect('home')
+
 
 def home(request):
     url = "https://weather.cma.cn/api/map/weather/1"
@@ -87,74 +89,50 @@ def graphs(request):
 
 # Meteorological bulletins
 def bulletins(request, msg_index=None):
+    # url = 'https://weather.cma.cn'
+    # resp = requests.get(url)
+    #
+    # resp.encoding = 'utf-8'
+    # tree = html.fromstring(resp.content)
+    # # 应用XPath表达式，选择需要的元素
+    #
+    # bulletin_home = tree.xpath('/html/body/nav[3]/div/a[3]')[0]
+    # bulletin_home_url = "https://weather.cma.cn" + bulletin_home.attrib['href']
+    #
+    # resp = requests.get(bulletin_home_url)
+    # resp.encoding = 'utf-8'
+    # tree = html.fromstring(resp.content)
+    #
+    # a_data = tree.xpath('/html/body/div[1]/div[2]/div[1]/div/div[2]//a')
+    # hrefs = ["https://weather.cma.cn" + a.get('href') for a in a_data]
+    # print(hrefs)
+    # bulletinData.objects.all().delete()
+    # tid = 0
+    # for b_url in hrefs:
+    #     tid += 1
+    #     print(b_url)
+    #     resp = requests.get(b_url)
+    #     resp.encoding = 'utf-8'
+    #     tree = html.fromstring(resp.content)
+    #     content = tree.xpath('/html/body/div[1]/div[2]/div[2]')
+    #     title = tree.xpath('normalize-space(/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div//text())')
+    #     print(title)
+    #     new_bulletin = bulletinData(tid=tid,title=title, content=html.tostring(content[0], pretty_print=True).decode())
+    #     new_bulletin.save()
+
     if msg_index is None:
         msg_index = 1
-    url = 'https://weather.cma.cn'
-    resp = requests.get(url)
 
-    resp.encoding = 'utf-8'
-    tree = html.fromstring(resp.content)
-    # 应用XPath表达式，选择需要的元素
+    max_tid = bulletinData.objects.aggregate(max_tid=Max('tid'))['max_tid']
+    if int(msg_index) > max_tid:
+        return jumptohome(request)
 
-    bulletin_home = tree.xpath('/html/body/nav[3]/div/a[3]')[0]
-    bulletin_home_url = "https://weather.cma.cn" + bulletin_home.attrib['href']
+    bulletin = bulletinData.objects.get(tid=msg_index)
+    titles = [(str(i), bulletinData.objects.get(tid=i).title) for i in range(1, max_tid + 1)]
 
-    resp = requests.get(bulletin_home_url)
-    resp.encoding = 'utf-8'
-    tree = html.fromstring(resp.content)
+    data = {'bulletin': bulletin, 'titles': titles, 'msg_index': msg_index}
 
-    a_data = tree.xpath('/html/body/div[1]/div[2]/div[1]/div/div[2]//a')
-    hrefs = ["https://weather.cma.cn" + a.get('href') for a in a_data]
-    print(hrefs)
-    bulletinData.objects.all().delete()
-    tid = 0
-    for b_url in hrefs:
-        tid += 1
-        print(b_url)
-        resp = requests.get(b_url)
-        resp.encoding = 'utf-8'
-        tree = html.fromstring(resp.content)
-        content = tree.xpath('/html/body/div[1]/div[2]/div[2]')
-        # print(html.tostring(content[0], pretty_print=True).decode())
-        new_bulletin = bulletinData(tid=tid, content=html.tostring(content[0], pretty_print=True).decode())
-        new_bulletin.save()
-
-
-
-    # 应用XPath表达式，选择需要的链接元素
-    # 获取链接元素的href属性，即链接的URL
-    bulletins_url = tree.xpath('/html/body/nav[3]/div/a[3]')[0].get('href')
-
-    response = requests.get(url + '/web' + bulletins_url)
-    html_content = response.content
-    tree = html.fromstring(html_content)
-
-    head = "/html/body/div[1]/div[2]/div[1]/div/div[2]/a["
-    tail = "]"
-    urls = []
-    for i in range(1, 9):
-        urls.append(tree.xpath(head + str(i) + tail)[0].attrib['href'])
-    new_str = tree.xpath(head + str(msg_index) + tail)[0].attrib['href']
-    # urls.append(new_str)
-    with open("templates/bulletin.html", "w", encoding='utf-8') as f:
-        print(new_str)
-        response = requests.get(url + new_str)
-        response.encoding = 'utf-8'
-        content_str = response.text
-        # 获取当前日期
-        today = datetime.today()
-        # 格式化日期为 '年/月/日' 格式
-        formatted_date = today.strftime('/file/%Y/%m/%d')
-        content_str = content_str.replace(formatted_date, "https://weather.cma.cn" + formatted_date)
-        for i in range(1, 9):
-            content_str = content_str.replace(urls[i - 1], str(i))
-        soup = BeautifulSoup(content_str, "html.parser")
-        datas = soup.find_all("div", class_="container")
-        data = datas[3].find_all("div", class_="hp mt15")
-        data[0].extract()
-        f.write(datas[3].prettify())
-
-    return render(request, "bulletins_base.html")
+    return render(request, "bulletins_base.html", data)
 
 
 def alarm_map(request):
@@ -191,3 +169,10 @@ def get_city_weather(request, city_index):
 
 def test(request):
     return render(request, "test.html")
+
+
+def redirect_to_file(request):
+    original_uri = request.get_full_path()
+    print(original_uri)
+    new_uri = "https://weather.cma.cn" + original_uri
+    return HttpResponsePermanentRedirect(new_uri)

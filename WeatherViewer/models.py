@@ -11,4 +11,5 @@ class UpdateTime(models.Model):
 
 class bulletinData(models.Model):
     tid = models.IntegerField()
+    title = models.CharField(max_length=50)
     content = models.TextField()

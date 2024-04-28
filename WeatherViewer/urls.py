@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
+    re_path(r'^file/.*$', views.redirect_to_file, name='redirect_to_file'),
     path('', views.jumptohome, name='jumptohome'),
     path('home/', views.home, name='home'),
     path('search/', views.search_results, name='search_results'),

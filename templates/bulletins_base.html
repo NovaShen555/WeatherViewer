@@ -13,15 +13,15 @@
                  气象公报
                 </div>
                 <div class="hb">
-                 <a class="actived" href="1" target="_self">
-                  每日天气提示
-                 </a>
-                 <a href="2" target="_self">
-                  重要天气提示
-                 </a>
+                    {% for tid, title in titles %}
+                        <a href="{{ tid }}" target="_self" {% if tid == msg_index %}class="actived"{% endif %}>
+                            {{ title }}
+                        </a>
+                    {% endfor %}
                 </div>
                </div>
         </div>
+        {{ bulletin.content|safe }}
     </div>
-    {% include "bulletin.html"%}
+{#    {% include "bulletin.html"%}#}
 {% endblock %}
