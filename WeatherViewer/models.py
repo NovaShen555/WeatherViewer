@@ -8,3 +8,7 @@ class CityInfo(models.Model):
 class UpdateTime(models.Model):
     timeid = models.CharField(max_length=50)
     deltatime = models.DateField()
+
+class bulletinData(models.Model):
+    tid = models.IntegerField()
+    content = models.TextField()

@@ -3,21 +3,25 @@
 
 {% block mapstyle%}
 <link rel="stylesheet" href="{% static AppVite.css%}">
-{% comment %} <style>
-    .container {
-        position:absolute;
-        top:0;
-        left:0;
-        width:1500px;
-        border:solid 1px black;
-    }
 
-    .mt15 {
-        display:flex;
-        flex-direction:row;
-    }
-</style> {% endcomment %}
 {% endblock%}
 {% block content%}
+    <div class="row mt15">
+        <div class="col-xs-3">
+            <div class="hp nav-menu">
+                <div class="hd text-center" style="height:60px; line-height:60px;">
+                 气象公报
+                </div>
+                <div class="hb">
+                 <a class="actived" href="1" target="_self">
+                  每日天气提示
+                 </a>
+                 <a href="2" target="_self">
+                  重要天气提示
+                 </a>
+                </div>
+               </div>
+        </div>
+    </div>
     {% include "bulletin.html"%}
 {% endblock %}
