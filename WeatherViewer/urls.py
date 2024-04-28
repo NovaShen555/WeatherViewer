@@ -13,6 +13,5 @@ urlpatterns = [
     path('bulletins/', views.bulletins, name='jumptobulletins'),
     path('graphs/',views.graphs,name='graphs'),
     path('alarm/',views.alarm_map,name='alarm'),
-    path('weather/<city_index>',views.get_city_weather,name='get_city_weather'),
-    path('test/',views.test,name='test')
+    path('weather/<city_index>',views.get_city_weather,name='get_city_weather')
 ]

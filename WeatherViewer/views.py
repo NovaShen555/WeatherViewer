@@ -166,11 +166,6 @@ def get_city_weather(request, city_index):
         return jumptohome(request)
     return render(request, "city_weather.html")
 
-
-def test(request):
-    return render(request, "test.html")
-
-
 def redirect_to_file(request):
     original_uri = request.get_full_path()
     print(original_uri)
