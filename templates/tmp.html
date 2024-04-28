@@ -4,81 +4,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <!-- 引入 Leaflet.js 的 CSS 文件 -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>{% block title %}{% endblock %}</title>
+
     <link rel="stylesheet" type="text/css" href="{% static "font_1145929_t7e3a52mhxh.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "pub.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "precity.css" %}"/>
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="{% static "js/../static/css/L.Control.Sidebar.css" %}">
-    <script src="{% static "js/weather.js" %}"></script>
-    <!-- 引入 Bootstrap CSS 文件 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    {% block importblock %}{% endblock importblock %}
-    {% block mapstyle %}{% endblock mapstyle %}
-    <style>
-        .search-bar {
-            text-align: right;
-            margin-right: 50px; /* 设置搜索栏与右边界的距离 */
-            margin-top: 20px; /* 设置搜索栏与上边界的距离 */
-        }
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pub.css' %}"> 
+    <link href="{% static 'css/leaflet.css' %}" rel="stylesheet" type="text/css"> 
+    <link rel="stylesheet" href="{% static 'css/L.Control.Sidebar.css' %}"> 
+    <script type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}"></script> 
+    <script src="{% static 'js/jquery.cookie.js' %}" type="text/javascript"></script> 
+    <script src="{% static 'js/jquery.autocomplete.js' %}" type="text/javascript"></script> 
+    <script src="{% static 'js/bootstrap-hover-dropdown.min.js' %}" type="text/javascript"></script> 
+    <script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script> 
+    <script type="text/javascript" src="{% static 'js/jquery.mCustomScrollbar.min.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/echarts.min.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/weather.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/leaflet.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'js/L.Control.Sidebar.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/CMAweather.js' %}"></script> 
+    
+    {% block ex_import %}{% endblock %}
 
-        .search-bar input[type="text"] {
-            width: 300px; /* 设置搜索框的宽度 */
-            padding: 10px; /* 设置搜索框的内边距 */
-            border: 1px solid #ccc; /* 设置搜索框的边框 */
-            border-radius: 5px; /* 设置搜索框的边框圆角 */
-            box-sizing: border-box; /* 设置盒模型为 border-box，包括内边距和边框在内的尺寸都被包含在内，而不会增加盒子的尺寸 */
-        }
+{% block script %}
 
-        .search-bar button {
-            padding: 10px 20px; /* 设置按钮的内边距 */
-            border: none; /* 移除按钮的边框 */
-            border-radius: 5px; /* 设置按钮的边框圆角 */
-            background-color: #007bff; /* 设置按钮的背景颜色 */
-            color: #fff; /* 设置按钮的文字颜色 */
-            cursor: pointer; /* 设置鼠标悬停时的光标样式为手型 */
-        }
+{% endblock %}
 
-        .menu-bar {
-            margin-top: 20px; /* 设置搜索栏与上边界的距离 */
-            width:100%;
-            background-color: #007bff; /* 设置按钮行的背景颜色 */
-            padding: 3px 20px; /* 设置按钮行的内边距，左右各 20px */
-            margin-top: 20px; /* 设置按钮行与搜索框之间的间距 */
-            display: flex; /* 使用 Flexbox 布局 */
-            justify-content: center; /* 水平居中按钮 */
-        }
-        
-        .menu-buttons {
-            display: flex; /* 使用 Flexbox 布局 */
-            align-items: center; /* 垂直居中按钮 */
-        }
-        
-        .menu-buttons button {
-            padding: 10px 50px; /* 设置按钮的内边距 */
-            margin: 0 0px; /* 设置按钮之间的间距 */
-            border: none; /* 移除按钮的边框 */
-            height: 60px; /* 设置按钮行的高度 */
-            background-color: #007bff; /* 设置按钮的背景颜色为蓝色 */
-            color: #fff; /* 设置按钮的文字颜色 */
-            cursor: pointer; /* 设置鼠标悬停时的光标样式为手型 */
-            font-size: 20px; /* 设置按钮的字体大小 */
-            transition: background-color 0.3s; /* 添加过渡效果 */
-        }
-
-        .menu-buttons button:hover {
-            background-color: #0056b3; /* 设置鼠标悬停时按钮的背景颜色为深蓝色 */
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
-        }
-
-        .menu-buttons button:first-child {
-            margin-left: 0; /* 如果按钮行的第一个按钮，则移除左边距 */
-        }
-    </style>
 </head>
 <body>
     <div class="search-bar">
@@ -94,14 +46,13 @@
             <a href="../bulletins"><button>气象公报</button></a>
             <a href="../alarm"><button>气象预警</button></a>
             <a href="../map"><button>城市预报</button></a>
-            <!-- 可以添加更多按钮 -->
         </div>
     </div>
+    
 {% block content %}
 
 {% endblock %}
     
-</div>
 </body>
 </html>
 

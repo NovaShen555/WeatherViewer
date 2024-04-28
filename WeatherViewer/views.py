@@ -4,7 +4,7 @@ from django.http import HttpResponse
 import requests
 import time
 from bs4 import BeautifulSoup
-from lxml import html
+from lxml import html,etree
 from datetime import datetime
 from static.utils.data.province_border import province_border
 from static.utils.data.province_data import province_data
@@ -138,30 +138,25 @@ def alarm_map(request):
 
 def get_city_weather(request, city_index):
     print(city_index)
-    # url = "https://weather.cma.cn/web/weather/53463.html"
-    # response = requests.get(url)
-    # response.encoding = 'utf-8'
-    # soup = BeautifulSoup(response.text, 'html.parser')
-    # view_weather = soup.find_all("div", class_="col-xs-12")
-    # view_weather = view_weather[0]
-    # with open("templates/view_weather.html", "w", encoding='utf-8') as f:
-    #     f.write(view_weather.prettify())
-    # print(view_weather.prettify())
-    #
-    # url = 'https://weather.cma.cn/web/weather/' + str(city_index)
-    # response = requests.get(url)
-    # with open("templates/city_weather_from_web.html", "w", encoding='utf-8') as f:
-    #     # f.write(response.text)
-    #     soup = BeautifulSoup(response.text, "html.parser")
-    #     items = soup.find_all("div", class_="col-xs-9")
-    #     items = items[0]
-    #     f.write(items.prettify())
-    # print(city_index)
-    # head = "https://weather.cma.cn/web/weather/"
-    # url = head + str(city_index)
-    # response = requests.get(url)
-    # if response.status_code != 200:
-    #     return jumptohome(request)
+
+    url = 'https://weather.cma.cn/web/weather/' + str(city_index)
+    response = requests.get(url)
+    response.encoding = 'utf-8'
+    html_content = response.content
+    tree = html.fromstring(html_content)
+    # 应用XPath表达式，选择需要的元素
+    head_data = tree.xpath('/html/body/div[1]/div')
+    html_str = etree.tostring(head_data[0],pretty_print=True, method='html')
+    print(html.tostring(head_data[0], pretty_print=True).decode())
+    with open("templates/view_weather.html", "w", encoding='utf-8') as f:
+        f.write(html.tostring(head_data[0], pretty_print=True).decode())
+
+    with open("templates/city_weather_from_web.html", "w", encoding='utf-8') as f:
+        f.write(html.tostring(head_data[1], pretty_print=True).decode())
+
+    qwe = requests.get(url)
+    if qwe.status_code != 200:
+        return jumptohome(request)
     return render(request, "city_weather.html")
 
 
