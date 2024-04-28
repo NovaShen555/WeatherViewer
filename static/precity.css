@@ -1,11 +1,11 @@
-.container {
-    display: flex; /* 使用 Flexbox 布局 */
-    display: flex; /* 使用 Flexbox 居中内容 */
-    flex-direction: column; /* 垂直排布内容 */
-    justify-content: center; /* 水平居中内容 */
-    align-items: center; /* 垂直居中内容 */
-    
-}
+/*.container {*/
+/*    display: flex; !* 使用 Flexbox 布局 *!*/
+/*    display: flex; !* 使用 Flexbox 居中内容 *!*/
+/*    flex-direction: column; !* 垂直排布内容 *!*/
+/*    justify-content: center; !* 水平居中内容 *!*/
+/*    align-items: center; !* 垂直居中内容 *!*/
+
+/*}*/
 .search-bar {
     text-align: right;
     margin-right: 50px; /* 设置搜索栏与右边界的距离 */

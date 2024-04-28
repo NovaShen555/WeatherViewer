@@ -1,0 +1,9 @@
+.leaflet-popup-content-wrapper{border-radius:0;padding:0 0 1px 0;}
+.leaflet-popup-content{width:170px;margin:0;}
+.mypopup .popup-title{
+   padding: 10px 10px;
+  background-color: #4989c6;
+  color: #fff;
+  margin:0;
+}
+.leaflet-container a.leaflet-popup-close-button{color:#fff;}
