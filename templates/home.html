@@ -1,21 +1,10 @@
 {% extends "tmp.html" %}
 {%load static%}
 
-
-
 {% block title %}中国气象局-天气预报{% endblock %}
 
 {% block ex_import %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font_1145929_t7e3a52mhxh.css' %}">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="https://weather.cma.cn/assets/lib/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
-    <link rel="stylesheet" href="https://weather.cma.cn/assets/lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://weather.cma.cn/assets/cma/css/pub.css?v=20240424184700">
-   <script type="text/javascript" src="https://weather.cma.cn/assets/lib/jquery-1.9.1.min.js"></script>
-    <link href="https://weather.cma.cn/assets/lib/leaflet/leaflet.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="/static/SuperSlide/jquery.SuperSlide.2.1.js"></script>
-    <link href="{% static "css/home_style.css" %}" rel="stylesheet" type="text/css">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+   <link href="{% static "css/home_style.css" %}" rel="stylesheet" type="text/css">
 {% endblock %}
 {% block content %}
     <div class="container">
