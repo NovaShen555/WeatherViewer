@@ -93,35 +93,13 @@ def alarm_map(request):
 def get_city_weather(request, city_index):
     print(city_index)
 
-    # url = 'https://weather.cma.cn/web/weather/' + str(city_index)
-    # response = requests.get(url)
-    # response.encoding = 'utf-8'
-    # html_content = response.content
-    # tree = html.fromstring(html_content)
-    # # 应用XPath表达式，选择需要的元素
-    # head_data = tree.xpath('/html/body/div[1]/div')
-    # print(html.tostring(head_data[0], pretty_print=True).decode())
-    # with open("templates/view_weather.html", "w", encoding='utf-8') as f:
-    #     f.write(html.tostring(head_data[0], pretty_print=True).decode())
-    #
-    # with open("templates/city_weather_from_web.html", "w", encoding='utf-8') as f:
-    #     f.write(html.tostring(head_data[1], pretty_print=True).decode())
-    #
-    # qwe = requests.get(url)
-    # if qwe.status_code != 200:
-    #     return jumptohome(request)
-
-
     weather = weatherData.objects.filter(city_id=city_index)
     if weather:
         weather = weather[0]
-        update_date = weather.update_date
-        upper = weather.upper_content
-        lower = weather.lower_content
         return render(request, "city_weather.html", {
-            'upper': upper,
-            'lower': lower,
-            'update_date': update_date
+            'upper': weather.upper_content,
+            'lower': weather.lower_content,
+            'update_date': weather.update_date
         })
 
     return HttpResponsePermanentRedirect("/home")
