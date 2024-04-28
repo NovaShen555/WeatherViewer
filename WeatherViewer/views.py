@@ -66,37 +66,6 @@ def graphs(request):
 
 # Meteorological bulletins
 def bulletins(request, msg_index=None):
-    # url = 'https://weather.cma.cn'
-    # resp = requests.get(url)
-    #
-    # resp.encoding = 'utf-8'
-    # tree = html.fromstring(resp.content)
-    # # 应用XPath表达式，选择需要的元素
-    #
-    # bulletin_home = tree.xpath('/html/body/nav[3]/div/a[3]')[0]
-    # bulletin_home_url = "https://weather.cma.cn" + bulletin_home.attrib['href']
-    #
-    # resp = requests.get(bulletin_home_url)
-    # resp.encoding = 'utf-8'
-    # tree = html.fromstring(resp.content)
-    #
-    # a_data = tree.xpath('/html/body/div[1]/div[2]/div[1]/div/div[2]//a')
-    # hrefs = ["https://weather.cma.cn" + a.get('href') for a in a_data]
-    # print(hrefs)
-    # bulletinData.objects.all().delete()
-    # tid = 0
-    # for b_url in hrefs:
-    #     tid += 1
-    #     print(b_url)
-    #     resp = requests.get(b_url)
-    #     resp.encoding = 'utf-8'
-    #     tree = html.fromstring(resp.content)
-    #     content = tree.xpath('/html/body/div[1]/div[2]/div[2]')
-    #     title = tree.xpath('normalize-space(/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div//text())')
-    #     print(title)
-    #     new_bulletin = bulletinData(tid=tid,title=title, content=html.tostring(content[0], pretty_print=True).decode())
-    #     new_bulletin.save()
-
     if msg_index is None:
         msg_index = 1
 
@@ -164,6 +133,37 @@ def redirect_to_file(request):
     return HttpResponsePermanentRedirect(new_uri)
 
 def test(request):
+    url = 'https://weather.cma.cn'
+    resp = requests.get(url)
+
+    resp.encoding = 'utf-8'
+    tree = html.fromstring(resp.content)
+    # 应用XPath表达式，选择需要的元素
+
+    bulletin_home = tree.xpath('/html/body/nav[3]/div/a[3]')[0]
+    bulletin_home_url = "https://weather.cma.cn" + bulletin_home.attrib['href']
+
+    resp = requests.get(bulletin_home_url)
+    resp.encoding = 'utf-8'
+    tree = html.fromstring(resp.content)
+
+    a_data = tree.xpath('/html/body/div[1]/div[2]/div[1]/div/div[2]//a')
+    hrefs = ["https://weather.cma.cn" + a.get('href') for a in a_data]
+    print(hrefs)
+    bulletinData.objects.all().delete()
+    tid = 0
+    for b_url in hrefs:
+        tid += 1
+        print(b_url)
+        resp = requests.get(b_url)
+        resp.encoding = 'utf-8'
+        tree = html.fromstring(resp.content)
+        content = tree.xpath('/html/body/div[1]/div[2]/div[2]')
+        title = tree.xpath('normalize-space(/html/body/div[1]/div[2]/div[2]/div[1]/div[1]/div//text())')
+        print(title)
+        new_bulletin = bulletinData(tid=tid,title=title, content=html.tostring(content[0], pretty_print=True).decode())
+        new_bulletin.save()
+
     url = "https://weather.cma.cn/api/map/weather/1"
     response = requests.get(url)
     data = response.json()
