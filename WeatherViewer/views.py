@@ -138,28 +138,32 @@ def alarm_map(request):
 
 def get_city_weather(request, city_index):
     print(city_index)
-    url = "https://weather.cma.cn/web/weather/53463.html"
-    response = requests.get(url)
-    response.encoding = 'utf-8'
-    soup = BeautifulSoup(response.text, 'html.parser')
-    view_weather = soup.find_all("div", class_="col-xs-12")
-    view_weather = view_weather[0]
-    with open("templates/view_weather.html", "w", encoding='utf-8') as f:
-        f.write(view_weather.prettify())
-    print(view_weather.prettify())
-
-    url = 'https://weather.cma.cn/web/weather/' + str(city_index)
-    response = requests.get(url)
-    with open("templates/city_weather_from_web.html", "w", encoding='utf-8') as f:
-        # f.write(response.text)
-        soup = BeautifulSoup(response.text, "html.parser")
-        items = soup.find_all("div", class_="col-xs-9")
-        items = items[0]
-        f.write(items.prettify())
-    print(city_index)
-    head = "https://weather.cma.cn/web/weather/"
-    url = head + str(city_index)
-    response = requests.get(url)
-    if response.status_code != 200:
-        return jumptohome(request)
+    # url = "https://weather.cma.cn/web/weather/53463.html"
+    # response = requests.get(url)
+    # response.encoding = 'utf-8'
+    # soup = BeautifulSoup(response.text, 'html.parser')
+    # view_weather = soup.find_all("div", class_="col-xs-12")
+    # view_weather = view_weather[0]
+    # with open("templates/view_weather.html", "w", encoding='utf-8') as f:
+    #     f.write(view_weather.prettify())
+    # print(view_weather.prettify())
+    #
+    # url = 'https://weather.cma.cn/web/weather/' + str(city_index)
+    # response = requests.get(url)
+    # with open("templates/city_weather_from_web.html", "w", encoding='utf-8') as f:
+    #     # f.write(response.text)
+    #     soup = BeautifulSoup(response.text, "html.parser")
+    #     items = soup.find_all("div", class_="col-xs-9")
+    #     items = items[0]
+    #     f.write(items.prettify())
+    # print(city_index)
+    # head = "https://weather.cma.cn/web/weather/"
+    # url = head + str(city_index)
+    # response = requests.get(url)
+    # if response.status_code != 200:
+    #     return jumptohome(request)
     return render(request, "city_weather.html")
+
+
+def test(request):
+    return render(request, "test.html")
