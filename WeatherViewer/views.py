@@ -74,12 +74,13 @@ def weather_map(request):
 
 
 def weather_report(request):
-    head = "https://weather.cma.cn/api/map/weather/1?t="
-    url = head + str(int(time.time() * 1000))
+    url = "https://weather.cma.cn/api/map/weather/1"
     response = requests.get(url)
     city_data = response.text
     return render(request, 'toolmap.html', {
-        'city_data_json': city_data
+        'city_data_json': city_data,
+        'province_border': province_border,
+        'province_data': province_data
     })
 
 
