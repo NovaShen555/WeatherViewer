@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from lxml import html, etree
 from datetime import datetime
 
-from WeatherViewer.models import bulletinData
+from WeatherViewer.models import bulletinData, CityInfo
 from static.utils.data.province_border import province_border
 from static.utils.data.province_data import province_data
 
@@ -31,23 +31,12 @@ def home(request):
 def search_results(request):
     query = request.GET.get('query')
 
-    head = "https://weather.cma.cn/api/map/weather/1?t="
-    url = head + str(int(time.time() * 1000))
-    response = requests.get(url)
-    data = response.json()
-    cities = [
-        {'url': "../wheather/" + sublist[0], 'name': sublist[1]}
-        for sublist in data['data']['city']
-        if len(sublist) >= 2 and sublist[1] == query
-    ]
-    for city in cities:
-        print(city)
-    # Perform search logic here
-    # Return search results page
-    return render(request, 'search.html', {
-        'query': query,
-        'cities': json.dumps(cities)
-    })
+    city = CityInfo.objects.filter(cityname__contains=query)
+    if city:
+        print(city[0].cityname)
+        return HttpResponsePermanentRedirect(city[0].cityurl)
+
+    return HttpResponsePermanentRedirect("/home")
 
 
 def search_ex(request):
@@ -172,3 +161,18 @@ def redirect_to_file(request):
     print(original_uri)
     new_uri = "https://weather.cma.cn" + original_uri
     return HttpResponsePermanentRedirect(new_uri)
+
+def test(request):
+    url = "https://weather.cma.cn/api/map/weather/1"
+    response = requests.get(url)
+    data = response.json()
+    cities = [
+        {'url': "../weather/" + sublist[0], 'name': sublist[1],'WeatherUpdateDate':data["data"]["date"].replace("/","-")}
+        for sublist in data['data']['city']
+    ]
+    CityInfo.objects.all().delete()
+    for city in cities:
+        print(city)
+        new_city = CityInfo(cityname=city['name'], cityurl=city['url'], WeatherUpdateDate=city['WeatherUpdateDate'])
+        new_city.save()
+    return HttpResponse("1")
